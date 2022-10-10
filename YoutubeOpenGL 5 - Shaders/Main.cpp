@@ -12,12 +12,12 @@
 // Vertices coordinates
 GLfloat vertices[] =
 { //               COORDINATES                  /     COLORS           //
-	-0.5f, -0.5f * float(sqrt(3)) * 1 / 3, 0.0f,     0.8f, 0.3f,  0.02f, // Lower left corner
-	 0.5f, -0.5f * float(sqrt(3)) * 1 / 3, 0.0f,     0.8f, 0.3f,  0.02f, // Lower right corner
-	 0.0f,  0.5f * float(sqrt(3)) * 2 / 3, 0.0f,     1.0f, 0.6f,  0.32f, // Upper corner
-	-0.25f, 0.5f * float(sqrt(3)) * 1 / 6, 0.0f,     0.9f, 0.45f, 0.17f, // Inner left
-	 0.25f, 0.5f * float(sqrt(3)) * 1 / 6, 0.0f,     0.9f, 0.45f, 0.17f, // Inner right
-	 0.0f, -0.5f * float(sqrt(3)) * 1 / 3, 0.0f,     0.8f, 0.3f,  0.02f  // Inner down
+	-0.3f, -0.7f * float(sqrt(3)) * 1 / 3, 0.0f,     0.0f, 0.0f,  0.1f, // Lower left corner
+	 0.3f, -0.7f * float(sqrt(3)) * 1 / 3, 0.0f,     0.0f, 0.0f,  0.1f, // Lower right corner
+	 0.0f,  0.5f * float(sqrt(3)) * 2 / 3, 0.0f,     1.0f, 0.0f,  0.0f, // Upper corner
+	-0.15f, 0.3f * float(sqrt(3)) * 1 / 6, 0.0f,     0.0f, 1.0f, 0.0f, // Inner left
+	 0.15f, 0.3f * float(sqrt(3)) * 1 / 6, 0.0f,     0.0f, 1.0f, 0.0f, // Inner right
+	 0.0f, -0.7f * float(sqrt(3)) * 1 / 3, 0.0f,     0.0f, 0.0f,  0.1f  // Inner down
 };
 
 // Indices for vertices order
@@ -44,7 +44,7 @@ int main()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	// Create a GLFWwindow object of 800 by 800 pixels, naming it "YoutubeOpenGL"
-	GLFWwindow* window = glfwCreateWindow(800, 800, "YoutubeOpenGL", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(1920, 1080, "YoutubeOpenGL", NULL, NULL);
 	// Error check if the window fails to create
 	if (window == NULL)
 	{
@@ -59,7 +59,7 @@ int main()
 	gladLoadGL();
 	// Specify the viewport of OpenGL in the Window
 	// In this case the viewport goes from x = 0, y = 0, to x = 800, y = 800
-	glViewport(0, 0, 800, 800);
+	glViewport(0, 0, 1920, 1080);
 
 
 

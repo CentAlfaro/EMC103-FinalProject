@@ -20,34 +20,44 @@ namespace fs = std::filesystem;
 
 
 
-const unsigned int width = 800;
-const unsigned int height = 800;
+const unsigned int width = 1600;
+const unsigned int height = 900;
 
+float ts = 1.0;
 
 
 // Vertices coordinates
 GLfloat vertices[] =
 { //     COORDINATES     /        COLORS          /    TexCoord   /        NORMALS       //
-	-0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f, 	 0.0f, 0.0f,      0.0f, -1.0f, 0.0f, // Bottom side
-	-0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 5.0f,      0.0f, -1.0f, 0.0f, // Bottom side
-	 0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	 5.0f, 5.0f,      0.0f, -1.0f, 0.0f, // Bottom side
-	 0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,	 5.0f, 0.0f,      0.0f, -1.0f, 0.0f, // Bottom side
+	-0.5f, -0.5f,  0.5f,     0.83f, 0.70f, 0.44f, 	 0.0f, 0.0f,		0.0f, -1.0f, 0.0f, // Bottom side front left 0
+	-0.5f, -0.5f, -0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, ts,			0.0f, -1.0f, 0.0f, // Bottom side back left 1
+	 0.5f, -0.5f, -0.5f,     0.83f, 0.70f, 0.44f,	 ts, ts,			0.0f, -1.0f, 0.0f, // Bottom side back right2
+	 0.5f, -0.5f,  0.5f,     0.83f, 0.70f, 0.44f,	 ts, 0.0f,			0.0f, -1.0f, 0.0f, // Bottom side front right 3
 
-	-0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f, 	 0.0f, 0.0f,     -0.8f, 0.5f,  0.0f, // Left Side
-	-0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	 5.0f, 0.0f,     -0.8f, 0.5f,  0.0f, // Left Side
-	 0.0f, 0.8f,  0.0f,     0.92f, 0.86f, 0.76f,	 2.5f, 5.0f,     -0.8f, 0.5f,  0.0f, // Left Side
+	 -0.5f, 0.5f,  0.5f,     0.83f, 0.70f, 0.44f, 	 0.0f, 0.0f,		0.0f, 1.0f, 0.0f, // Top side front left 4
+	-0.5f, 0.5f, -0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, ts,			0.0f, 1.0f, 0.0f, // Top side back left 5
+	 0.5f, 0.5f, -0.5f,     0.83f, 0.70f, 0.44f,	 ts, ts,			0.0f, 1.0f, 0.0f, // Top side back right 6
+	 0.5f, 0.5f,  0.5f,     0.83f, 0.70f, 0.44f,	 ts, 0.0f,			0.0f, 1.0f, 0.0f, // Top side front right 7
 
-	-0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	 5.0f, 0.0f,      0.0f, 0.5f, -0.8f, // Non-facing side
-	 0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,      0.0f, 0.5f, -0.8f, // Non-facing side
-	 0.0f, 0.8f,  0.0f,     0.92f, 0.86f, 0.76f,	 2.5f, 5.0f,      0.0f, 0.5f, -0.8f, // Non-facing side
+	-0.5f, -0.5f,  0.5f,     0.83f, 0.70f, 0.44f, 	 0.0f, 0.0f,		-0.8f, 0.5f,  0.0f, // Left Side bottom front 8
+	-0.5f, -0.5f, -0.5f,     0.83f, 0.70f, 0.44f,	 ts, 0.0f,			-0.8f, 0.5f,  0.0f, // Left Side bottom back 9
+	 -0.5f, 0.5f,  -0.5f,     0.92f, 0.86f, 0.76f,	 ts, ts,			-0.8f, 0.5f,  0.0f, // Left Side top back 10
+	 -0.5f, 0.5f,  0.5f,     0.92f, 0.86f, 0.76f,	 0.0f, ts,			-0.8f, 0.5f,  0.0f, // Left Side top front 11
 
-	 0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,      0.8f, 0.5f,  0.0f, // Right side
-	 0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,	 5.0f, 0.0f,      0.8f, 0.5f,  0.0f, // Right side
-	 0.0f, 0.8f,  0.0f,     0.92f, 0.86f, 0.76f,	 2.5f, 5.0f,      0.8f, 0.5f,  0.0f, // Right side
+	-0.5f, -0.5f, -0.5f,     0.83f, 0.70f, 0.44f,	 ts, 0.0f,			0.0f, 0.5f, -0.8f, // Non-facing side bottom left 12
+	 0.5f, -0.5f, -0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, 0.5f, -0.8f, // Non-facing side bottom right 13
+	 -0.5f, 0.5f,  -0.5f,     0.92f, 0.86f, 0.76f,	 ts, ts,			0.0f, 0.5f, -0.8f, // Non-facing side top left 14
+	 0.5f, 0.5f,  -0.5f,     0.92f, 0.86f, 0.76f,	 0.0f, ts,			0.0f, 0.5f, -0.8f, // Non-facing side top right 15
 
-	 0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,	 5.0f, 0.0f,      0.0f, 0.5f,  0.8f, // Facing side
-	-0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f, 	 0.0f, 0.0f,      0.0f, 0.5f,  0.8f, // Facing side
-	 0.0f, 0.8f,  0.0f,     0.92f, 0.86f, 0.76f,	 2.5f, 5.0f,      0.0f, 0.5f,  0.8f  // Facing side
+	 0.5f, -0.5f, -0.5f,     0.83f, 0.70f, 0.44f,	 ts, 0.0f,			0.0f, 0.5f,  1.0f, // Right side bottom back 16
+	 0.5f, -0.5f,  0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, 0.5f,  1.0f, // Right side bottom front 17
+	 0.5f, 0.5f,  -0.5f,     0.92f, 0.86f, 0.76f,	 ts, ts,			0.0f, 0.5f,  1.0f, // Right side top back 18
+	 0.5f, 0.5f,  0.5f,     0.92f, 0.86f, 0.76f,	 0.0f, ts,			0.0f, 0.5f,  1.0f, // Right side top front 19
+
+	 0.5f, -0.5f,  0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, 0.5f,  0.8f, // Facing side bottom right 20
+	-0.5f, -0.5f,  0.5f,     0.83f, 0.70f, 0.44f, 	 ts, 0.0f,			0.0f, 0.5f,  0.8f, // Facing side bottom left 21
+	-0.5f,  0.5f,  0.5f,     0.92f, 0.86f, 0.76f,	 ts, ts,			0.0f, 0.5f,  0.8f,  // Facing side top left 22
+	 0.5f,  0.5f,  0.5f,     0.92f, 0.86f, 0.76f,	 0.0f, ts,			0.0f, 0.5f,  0.8f  // Facing side top right 23
 };
 
 // Indices for vertices order
@@ -55,10 +65,21 @@ GLuint indices[] =
 {
 	0, 1, 2, // Bottom side
 	0, 2, 3, // Bottom side
-	4, 6, 5, // Left side
-	7, 9, 8, // Non-facing side
-	10, 12, 11, // Right side
-	13, 15, 14 // Facing side
+
+	4, 5, 6, // Top side
+	4, 6, 7, // Top side
+
+	8, 9, 10, // Left side
+	8, 10, 11, // Left side
+
+	12, 14, 15, // Non-facing side
+	12, 15, 13, // Non-facing side
+
+	16, 18, 19, // Right side
+	16, 19, 17, // Right side
+
+	20, 23, 22, // Facing side
+	20, 22, 21 // Facing side
 };
 
 GLfloat lightVertices[] =
@@ -162,7 +183,7 @@ int main()
 
 
 	glm::vec4 lightColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
-	glm::vec3 lightPos = glm::vec3(0.5f, 0.5f, 0.5f);
+	glm::vec3 lightPos = glm::vec3(1.0f, 1.3f, 1.0f);
 	glm::mat4 lightModel = glm::mat4(1.0f);
 	lightModel = glm::translate(lightModel, lightPos);
 
@@ -191,7 +212,7 @@ int main()
 	std::string texPath = "/Resources/YoutubeOpenGL 7 - Going 3D/";
 
 	// Texture
-	Texture brickTex((parentDir + texPath + "brick.png").c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+	Texture brickTex((parentDir + texPath + "redstone_block.png").c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 	brickTex.texUnit(shaderProgram, "tex0", 0);
 
 	// Original code from the tutorial
@@ -210,7 +231,7 @@ int main()
 	while (!glfwWindowShouldClose(window))
 	{
 		// Specify the color of the background
-		glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
+		glClearColor(0.01f, 0.01f, 0.01f, 1.0f);
 		// Clean the back buffer and depth buffer
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
