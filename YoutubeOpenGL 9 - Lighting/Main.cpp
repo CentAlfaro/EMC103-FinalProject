@@ -45,15 +45,15 @@ GLfloat vertices[] =
 	-0.5f, 1.5f, -0.5f,     0.92f, 0.86f, 0.76f,	 ts, ts,			-0.8f, 0.5f,  0.0f, // Left Side top back 10
 	-0.5f, 1.5f,  0.5f,     0.92f, 0.86f, 0.76f,	 0.0f, ts,			-0.8f, 0.5f,  0.0f, // Left Side top front 11
 
-	-0.5f, -1,   -0.5f,     0.83f, 0.70f, 0.44f,	 ts, 0.0f,			0.0f, 0.5f, -0.8f, // Non-facing side bottom left 12
-	 0.5f, -1,   -0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, 0.5f, -0.8f, // Non-facing side bottom right 13
-	-0.5f, 1.5f, -0.5f,     0.92f, 0.86f, 0.76f,	 ts, ts,			0.0f, 0.5f, -0.8f, // Non-facing side top left 14
-	 0.5f, 1.5f, -0.5f,     0.92f, 0.86f, 0.76f,	 0.0f, ts,			0.0f, 0.5f, -0.8f, // Non-facing side top right 15
+	-0.5f, -1,   -0.5f,     0.83f, 0.70f, 0.44f,	 ts, 0.0f,			0.0f, 0, -0, // Non-facing side bottom left 12
+	 0.5f, -1,   -0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, 0, -0, // Non-facing side bottom right 13
+	-0.5f, 1.5f, -0.5f,     0.92f, 0.86f, 0.76f,	 ts, ts,			0.0f, 0, -0, // Non-facing side top left 14
+	 0.5f, 1.5f, -0.5f,     0.92f, 0.86f, 0.76f,	 0.0f, ts,			0.0f, 0, -0, // Non-facing side top right 15
 
-	 0.5f, -1,   -0.5f,     0.83f, 0.70f, 0.44f,	 ts, 0.0f,			0.0f, 0.5f,  1.0f, // Right side bottom back 16
-	 0.5f, -1,    0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, 0.5f,  1.0f, // Right side bottom front 17
-	 0.5f, 1.5f, -0.5f,     0.92f, 0.86f, 0.76f,	 ts, ts,			0.0f, 0.5f,  1.0f, // Right side top back 18
-	 0.5f, 1.5f,  0.5f,     0.92f, 0.86f, 0.76f,	 0.0f, ts,			0.0f, 0.5f,  1.0f, // Right side top front 19
+	 0.5f, -1,   -0.5f,     0.83f, 0.70f, 0.44f,	 ts, 0.0f,			0.0f, 0,  0, // Right side bottom back 16
+	 0.5f, -1,    0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, 0,  0, // Right side bottom front 17
+	 0.5f, 1.5f, -0.5f,     0.92f, 0.86f, 0.76f,	 ts, ts,			0.0f, 0,  0, // Right side top back 18
+	 0.5f, 1.5f,  0.5f,     0.92f, 0.86f, 0.76f,	 0.0f, ts,			0.0f, 0,  0, // Right side top front 19
 
 	 0.5f, -1,	  0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, 0.5f,  0.8f, // Facing side bottom right 20
 	-0.5f, -1,    0.5f,     0.83f, 0.70f, 0.44f, 	 ts, 0.0f,			0.0f, 0.5f,  0.8f, // Facing side bottom left 21
@@ -73,20 +73,20 @@ GLfloat vertices2[] =
 	 0.5f, 0.5f,  -0.5f,      0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, 0.0f, 0.0f, // Top side back right 6
 	 0.5f, 0.5f,   0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, 0.0f, 0.0f, // Top side front right 7
 
-	-0.5f, -1,     0.5f,     0.83f, 0.70f, 0.44f, 	 0.0f, 0.0f,		-0.0f, 0.0f,  0.0f, // Left Side bottom front 8
+	-0.5f, -1,     0.5f,     0.83f, 0.70f, 0.44f, 	 0.0f, 0.0f,		-0.0f,	0.0f,  0.0f, // Left Side bottom front 8
 	-0.5f, -1,    -0.5f,     0.83f, 0.70f, 0.44f,	 ts2, 0.0f,			-0.0f, 0.0f,  0.0f, // Left Side bottom back 9
 	-0.5f, 0.5f,  -0.5f,     0.92f, 0.86f, 0.76f,	 ts2, ts2,			-0.0f, 0.0f,  0.0f, // Left Side top back 10
 	-0.5f, 0.5f,   0.5f,     0.92f, 0.86f, 0.76f,	 0.0f, ts2,			-0.0f, 0.0f,  0.0f, // Left Side top front 11
 
-	-0.5f, -1,    -0.5f,     0.83f, 0.70f, 0.44f,	 ts2, 0.0f,			0.0f, 0.5f, -0.8f, // Non-facing side bottom left 12
-	 0.5f, -1,    -0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, 0.5f, -0.8f, // Non-facing side bottom right 13
-	-0.5f, 0.5f,  -0.5f,     0.92f, 0.86f, 0.76f,	 ts2, ts2,			0.0f, 0.5f, -0.8f, // Non-facing side top left 14
-	 0.5f, 0.5f,  -0.5f,     0.92f, 0.86f, 0.76f,	 0.0f, ts2,			0.0f, 0.5f, -0.8f, // Non-facing side top right 15
+	-0.5f, -1,    -0.5f,     0.83f, 0.70f, 0.44f,	 ts2, 0.0f,			0.0f, 0, -0, // Non-facing side bottom left 12
+	 0.5f, -1,    -0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, 0, -0, // Non-facing side bottom right 13
+	-0.5f, 0.5f,  -0.5f,     0.92f, 0.86f, 0.76f,	 ts2, ts2,			0.0f, 0, -0, // Non-facing side top left 14
+	 0.5f, 0.5f,  -0.5f,     0.92f, 0.86f, 0.76f,	 0.0f, ts2,			0.0f, 0, -0, // Non-facing side top right 15
 
-	 0.5f, -1,    -0.5f,     0.83f, 0.70f, 0.44f,	 ts2, 0.0f,			0.0f, 0.5f,  1.0f, // Right side bottom back 16
-	 0.5f, -1,     0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, 0.5f,  1.0f, // Right side bottom front 17
-	 0.5f, 0.5f,  -0.5f,     0.92f, 0.86f, 0.76f,	 ts2, ts2,			0.0f, 0.5f,  1.0f, // Right side top back 18
-	 0.5f, 0.5f,   0.5f,     0.92f, 0.86f, 0.76f,	 0.0f, ts2,			0.0f, 0.5f,  1.0f, // Right side top front 19
+	 0.5f, -1,    -0.5f,     0.83f, 0.70f, 0.44f,	 ts2, 0.0f,			0.0f, 0,  0, // Right side bottom back 16
+	 0.5f, -1,     0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, 0,  0, // Right side bottom front 17
+	 0.5f, 0.5f,  -0.5f,     0.92f, 0.86f, 0.76f,	 ts2, ts2,			0.0f, 0,  0, // Right side top back 18
+	 0.5f, 0.5f,   0.5f,     0.92f, 0.86f, 0.76f,	 0.0f, ts2,			0.0f, 0,  0, // Right side top front 19
 
 	 0.5f, -1,  0.5f,        0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, 0.5f,  0.8f, // Facing side bottom right 20
 	-0.5f, -1,  0.5f,        0.83f, 0.70f, 0.44f, 	 ts2, 0.0f,			0.0f, 0.5f,  0.8f, // Facing side bottom left 21
@@ -236,7 +236,7 @@ int main()
 
 
 
-	glm::vec4 lightColor = glm::vec4(1.0f, 0.0f, 0.0f, 0.0f);
+	glm::vec4 lightColor = glm::vec4(1.0f, 1.0f, 1.0f, 0.0f);
 	glm::vec3 lightPos = glm::vec3(-2.0f, 1.3f, 1.0f);
 	glm::mat4 lightModel = glm::mat4(1.0f);
 	lightModel = glm::translate(lightModel, lightPos);
@@ -245,7 +245,7 @@ int main()
 	glm::mat4 object1Model = glm::mat4(1.0f);
 	object1Model = glm::translate(object1Model, object1Pos);
 
-	glm::vec3 object2Pos = glm::vec3(1.5f, 0.0f, 0.0f);
+	glm::vec3 object2Pos = glm::vec3(1.5f, 0.0f, -0.2f);
 	glm::mat4 object2Model = glm::mat4(1.0f);
 	object2Model = glm::translate(object2Model, object2Pos);
 
