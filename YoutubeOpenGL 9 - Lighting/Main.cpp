@@ -23,41 +23,75 @@ namespace fs = std::filesystem;
 const unsigned int width = 1600;
 const unsigned int height = 900;
 
-float ts = 1.0;
+float ts = 4.0f;
+float ts2 = 2.0f;
 
 
 // Vertices coordinates
 GLfloat vertices[] =
 { //     COORDINATES     /        COLORS          /    TexCoord   /        NORMALS       //
-	-0.5f, -0.5f,  0.5f,     0.83f, 0.70f, 0.44f, 	 0.0f, 0.0f,		0.0f, -1.0f, 0.0f, // Bottom side front left 0
-	-0.5f, -0.5f, -0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, ts,			0.0f, -1.0f, 0.0f, // Bottom side back left 1
-	 0.5f, -0.5f, -0.5f,     0.83f, 0.70f, 0.44f,	 ts, ts,			0.0f, -1.0f, 0.0f, // Bottom side back right2
-	 0.5f, -0.5f,  0.5f,     0.83f, 0.70f, 0.44f,	 ts, 0.0f,			0.0f, -1.0f, 0.0f, // Bottom side front right 3
+	-0.5f, -1.0f,  0.5f,     0.83f, 0.70f, 0.44f, 	 0.0f, 0.0f,		0.0f, -1.0f, 0.0f, // Bottom side front left 0
+	-0.5f, -1.0f, -0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, -1.0f, 0.0f, // Bottom side back left 1
+	 0.5f, -1.0f, -0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, -1.0f, 0.0f, // Bottom side back right2
+	 0.5f, -1.0f,  0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, -1.0f, 0.0f, // Bottom side front right 3
 
-	 -0.5f, 0.5f,  0.5f,     0.83f, 0.70f, 0.44f, 	 0.0f, 0.0f,		0.0f, 1.0f, 0.0f, // Top side front left 4
-	-0.5f, 0.5f, -0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, ts,			0.0f, 1.0f, 0.0f, // Top side back left 5
-	 0.5f, 0.5f, -0.5f,     0.83f, 0.70f, 0.44f,	 ts, ts,			0.0f, 1.0f, 0.0f, // Top side back right 6
-	 0.5f, 0.5f,  0.5f,     0.83f, 0.70f, 0.44f,	 ts, 0.0f,			0.0f, 1.0f, 0.0f, // Top side front right 7
+	-0.5f, 1.5f,  0.5f,     0.83f, 0.70f, 0.44f, 	 0.0f, 0.0f,		0.0f, 1.0f, 0.0f, // Top side front left 4
+	-0.5f, 1.5f, -0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, 1.0f, 0.0f, // Top side back left 5
+	 0.5f, 1.5f, -0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, 1.0f, 0.0f, // Top side back right 6
+	 0.5f, 1.5f,  0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, 1.0f, 0.0f, // Top side front right 7
 
-	-0.5f, -0.5f,  0.5f,     0.83f, 0.70f, 0.44f, 	 0.0f, 0.0f,		-0.8f, 0.5f,  0.0f, // Left Side bottom front 8
-	-0.5f, -0.5f, -0.5f,     0.83f, 0.70f, 0.44f,	 ts, 0.0f,			-0.8f, 0.5f,  0.0f, // Left Side bottom back 9
-	 -0.5f, 0.5f,  -0.5f,     0.92f, 0.86f, 0.76f,	 ts, ts,			-0.8f, 0.5f,  0.0f, // Left Side top back 10
-	 -0.5f, 0.5f,  0.5f,     0.92f, 0.86f, 0.76f,	 0.0f, ts,			-0.8f, 0.5f,  0.0f, // Left Side top front 11
+	-0.5f, -1,	  0.5f,     0.83f, 0.70f, 0.44f, 	 0.0f, 0.0f,		-0.8f, 0.5f,  0.0f, // Left Side bottom front 8
+	-0.5f, -1,   -0.5f,     0.83f, 0.70f, 0.44f,	 ts, 0.0f,			-0.8f, 0.5f,  0.0f, // Left Side bottom back 9
+	-0.5f, 1.5f, -0.5f,     0.92f, 0.86f, 0.76f,	 ts, ts,			-0.8f, 0.5f,  0.0f, // Left Side top back 10
+	-0.5f, 1.5f,  0.5f,     0.92f, 0.86f, 0.76f,	 0.0f, ts,			-0.8f, 0.5f,  0.0f, // Left Side top front 11
 
-	-0.5f, -0.5f, -0.5f,     0.83f, 0.70f, 0.44f,	 ts, 0.0f,			0.0f, 0.5f, -0.8f, // Non-facing side bottom left 12
-	 0.5f, -0.5f, -0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, 0.5f, -0.8f, // Non-facing side bottom right 13
-	 -0.5f, 0.5f,  -0.5f,     0.92f, 0.86f, 0.76f,	 ts, ts,			0.0f, 0.5f, -0.8f, // Non-facing side top left 14
-	 0.5f, 0.5f,  -0.5f,     0.92f, 0.86f, 0.76f,	 0.0f, ts,			0.0f, 0.5f, -0.8f, // Non-facing side top right 15
+	-0.5f, -1,   -0.5f,     0.83f, 0.70f, 0.44f,	 ts, 0.0f,			0.0f, 0.5f, -0.8f, // Non-facing side bottom left 12
+	 0.5f, -1,   -0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, 0.5f, -0.8f, // Non-facing side bottom right 13
+	-0.5f, 1.5f, -0.5f,     0.92f, 0.86f, 0.76f,	 ts, ts,			0.0f, 0.5f, -0.8f, // Non-facing side top left 14
+	 0.5f, 1.5f, -0.5f,     0.92f, 0.86f, 0.76f,	 0.0f, ts,			0.0f, 0.5f, -0.8f, // Non-facing side top right 15
 
-	 0.5f, -0.5f, -0.5f,     0.83f, 0.70f, 0.44f,	 ts, 0.0f,			0.0f, 0.5f,  1.0f, // Right side bottom back 16
-	 0.5f, -0.5f,  0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, 0.5f,  1.0f, // Right side bottom front 17
-	 0.5f, 0.5f,  -0.5f,     0.92f, 0.86f, 0.76f,	 ts, ts,			0.0f, 0.5f,  1.0f, // Right side top back 18
-	 0.5f, 0.5f,  0.5f,     0.92f, 0.86f, 0.76f,	 0.0f, ts,			0.0f, 0.5f,  1.0f, // Right side top front 19
+	 0.5f, -1,   -0.5f,     0.83f, 0.70f, 0.44f,	 ts, 0.0f,			0.0f, 0.5f,  1.0f, // Right side bottom back 16
+	 0.5f, -1,    0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, 0.5f,  1.0f, // Right side bottom front 17
+	 0.5f, 1.5f, -0.5f,     0.92f, 0.86f, 0.76f,	 ts, ts,			0.0f, 0.5f,  1.0f, // Right side top back 18
+	 0.5f, 1.5f,  0.5f,     0.92f, 0.86f, 0.76f,	 0.0f, ts,			0.0f, 0.5f,  1.0f, // Right side top front 19
 
-	 0.5f, -0.5f,  0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, 0.5f,  0.8f, // Facing side bottom right 20
-	-0.5f, -0.5f,  0.5f,     0.83f, 0.70f, 0.44f, 	 ts, 0.0f,			0.0f, 0.5f,  0.8f, // Facing side bottom left 21
-	-0.5f,  0.5f,  0.5f,     0.92f, 0.86f, 0.76f,	 ts, ts,			0.0f, 0.5f,  0.8f,  // Facing side top left 22
-	 0.5f,  0.5f,  0.5f,     0.92f, 0.86f, 0.76f,	 0.0f, ts,			0.0f, 0.5f,  0.8f  // Facing side top right 23
+	 0.5f, -1,	  0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, 0.5f,  0.8f, // Facing side bottom right 20
+	-0.5f, -1,    0.5f,     0.83f, 0.70f, 0.44f, 	 ts, 0.0f,			0.0f, 0.5f,  0.8f, // Facing side bottom left 21
+	-0.5f,  1.5f, 0.5f,     0.92f, 0.86f, 0.76f,	 ts, ts,			0.0f, 0.5f,  0.8f,  // Facing side top left 22
+	 0.5f,  1.5f, 0.5f,     0.92f, 0.86f, 0.76f,	 0.0f, ts,			0.0f, 0.5f,  0.8f  // Facing side top right 23
+};
+
+GLfloat vertices2[] =
+{ //     COORDINATES     /        COLORS          /    TexCoord   /        NORMALS       //
+	-0.5f, -1.0f,  0.5f,     0.83f, 0.70f, 0.44f, 	 0.0f, 0.0f,		0.0f, -1.0f, 0.0f, // Bottom side front left 0
+	-0.5f, -1.0f, -0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, -1.0f, 0.0f, // Bottom side back left 1
+	 0.5f, -1.0f, -0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, -1.0f, 0.0f, // Bottom side back right2
+	 0.5f, -1.0f,  0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, -1.0f, 0.0f, // Bottom side front right 3
+
+	-0.5f, 0.5f,   0.5f,     0.83f, 0.70f, 0.44f, 	 0.0f, 0.0f,		0.0f, 1.0f, 0.0f, // Top side front left 4
+	-0.5f, 0.5f,  -0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, 1.0f, 0.0f, // Top side back left 5
+	 0.5f, 0.5f,  -0.5f,      0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, 1.0f, 0.0f, // Top side back right 6
+	 0.5f, 0.5f,   0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, 1.0f, 0.0f, // Top side front right 7
+
+	-0.5f, -1,     0.5f,     0.83f, 0.70f, 0.44f, 	 0.0f, 0.0f,		-0.8f, 0.5f,  0.0f, // Left Side bottom front 8
+	-0.5f, -1,    -0.5f,     0.83f, 0.70f, 0.44f,	 ts2, 0.0f,			-0.8f, 0.5f,  0.0f, // Left Side bottom back 9
+	-0.5f, 0.5f,  -0.5f,     0.92f, 0.86f, 0.76f,	 ts2, ts2,			-0.8f, 0.5f,  0.0f, // Left Side top back 10
+	-0.5f, 0.5f,   0.5f,     0.92f, 0.86f, 0.76f,	 0.0f, ts2,			-0.8f, 0.5f,  0.0f, // Left Side top front 11
+
+	-0.5f, -1,    -0.5f,     0.83f, 0.70f, 0.44f,	 ts2, 0.0f,			0.0f, 0.5f, -0.8f, // Non-facing side bottom left 12
+	 0.5f, -1,    -0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, 0.5f, -0.8f, // Non-facing side bottom right 13
+	-0.5f, 0.5f,  -0.5f,     0.92f, 0.86f, 0.76f,	 ts2, ts2,			0.0f, 0.5f, -0.8f, // Non-facing side top left 14
+	 0.5f, 0.5f,  -0.5f,     0.92f, 0.86f, 0.76f,	 0.0f, ts2,			0.0f, 0.5f, -0.8f, // Non-facing side top right 15
+
+	 0.5f, -1,    -0.5f,     0.83f, 0.70f, 0.44f,	 ts2, 0.0f,			0.0f, 0.5f,  1.0f, // Right side bottom back 16
+	 0.5f, -1,     0.5f,     0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, 0.5f,  1.0f, // Right side bottom front 17
+	 0.5f, 0.5f,  -0.5f,     0.92f, 0.86f, 0.76f,	 ts2, ts2,			0.0f, 0.5f,  1.0f, // Right side top back 18
+	 0.5f, 0.5f,   0.5f,     0.92f, 0.86f, 0.76f,	 0.0f, ts2,			0.0f, 0.5f,  1.0f, // Right side top front 19
+
+	 0.5f, -1,  0.5f,        0.83f, 0.70f, 0.44f,	 0.0f, 0.0f,		0.0f, 0.5f,  0.8f, // Facing side bottom right 20
+	-0.5f, -1,  0.5f,        0.83f, 0.70f, 0.44f, 	 ts2, 0.0f,			0.0f, 0.5f,  0.8f, // Facing side bottom left 21
+	-0.5f,  0.5f,  0.5f,     0.92f, 0.86f, 0.76f,	 ts2, ts2,			0.0f, 0.5f,  0.8f,  // Facing side top left 22
+	 0.5f,  0.5f,  0.5f,     0.92f, 0.86f, 0.76f,	 0.0f, ts2,			0.0f, 0.5f,  0.8f  // Facing side top right 23
 };
 
 // Indices for vertices order
@@ -143,7 +177,7 @@ int main()
 	glViewport(0, 0, width, height);
 
 
-
+	//Model1
 	// Generates Shader object using shaders default.vert and default.frag
 	Shader shaderProgram("default.vert", "default.frag");
 	// Generates Vertex Array Object and binds it
@@ -162,6 +196,26 @@ int main()
 	VAO1.Unbind();
 	VBO1.Unbind();
 	EBO1.Unbind();
+
+	//Model2
+	// Generates Shader object using shaders default.vert and default.frag
+	Shader shaderProgram2("default.vert", "default.frag");
+	// Generates Vertex Array Object and binds it
+	VAO VAO2;
+	VAO2.Bind();
+	// Generates Vertex Buffer Object and links it to vertices
+	VBO VBO2(vertices2, sizeof(vertices2));
+	// Generates Element Buffer Object and links it to indices
+	EBO EBO2(indices, sizeof(indices));
+	// Links VBO attributes such as coordinates and colors to VAO
+	VAO2.LinkAttrib(VBO2, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
+	VAO2.LinkAttrib(VBO2, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
+	VAO2.LinkAttrib(VBO2, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
+	VAO2.LinkAttrib(VBO2, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
+	// Unbind all to prevent accidentally modifying them
+	VAO2.Unbind();
+	VBO2.Unbind();
+	EBO2.Unbind();
 
 
 	// Shader for light cube
@@ -187,18 +241,26 @@ int main()
 	glm::mat4 lightModel = glm::mat4(1.0f);
 	lightModel = glm::translate(lightModel, lightPos);
 
-	glm::vec3 pyramidPos = glm::vec3(0.0f, 0.0f, 0.0f);
-	glm::mat4 pyramidModel = glm::mat4(1.0f);
-	pyramidModel = glm::translate(pyramidModel, pyramidPos);
+	glm::vec3 object1Pos = glm::vec3(0.0f, 0.0f, 0.0f);
+	glm::mat4 object1Model = glm::mat4(1.0f);
+	object1Model = glm::translate(object1Model, object1Pos);
+
+	glm::vec3 object2Pos = glm::vec3(1.5f, 0.0f, 0.0f);
+	glm::mat4 object2Model = glm::mat4(1.0f);
+	object2Model = glm::translate(object2Model, object2Pos);
 
 
 	lightShader.Activate();
 	glUniformMatrix4fv(glGetUniformLocation(lightShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(lightModel));
 	glUniform4f(glGetUniformLocation(lightShader.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
 	shaderProgram.Activate();
-	glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "model"), 1, GL_FALSE, glm::value_ptr(pyramidModel));
+	glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "model"), 1, GL_FALSE, glm::value_ptr(object1Model));
 	glUniform4f(glGetUniformLocation(shaderProgram.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
 	glUniform3f(glGetUniformLocation(shaderProgram.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
+	shaderProgram2.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(shaderProgram2.ID, "model"), 1, GL_FALSE, glm::value_ptr(object2Model));
+	glUniform4f(glGetUniformLocation(shaderProgram2.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
+	glUniform3f(glGetUniformLocation(shaderProgram2.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
 
 
 
@@ -212,12 +274,15 @@ int main()
 	std::string texPath = "/Resources/YoutubeOpenGL 7 - Going 3D/";
 
 	// Texture
-	Texture brickTex((parentDir + texPath + "redstone_block.png").c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
-	brickTex.texUnit(shaderProgram, "tex0", 0);
+	Texture object1Tex((parentDir + texPath + "windows.png").c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+	object1Tex.texUnit(shaderProgram, "tex0", 0);
+
+	Texture object2Tex((parentDir + texPath + "oldwindows.png").c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+	object2Tex.texUnit(shaderProgram, "tex0", 0);
 
 	// Original code from the tutorial
-	/*Texture brickTex("brick.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
-	brickTex.texUnit(shaderProgram, "tex0", 0);*/
+	/*Texture object1Tex("brick.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+	object1Tex.texUnit(shaderProgram, "tex0", 0);*/
 
 
 
@@ -248,9 +313,22 @@ int main()
 		// Export the camMatrix to the Vertex Shader of the pyramid
 		camera.Matrix(shaderProgram, "camMatrix");
 		// Binds texture so that is appears in rendering
-		brickTex.Bind();
+		object1Tex.Bind();
 		// Bind the VAO so OpenGL knows to use it
 		VAO1.Bind();
+		// Draw primitives, number of indices, datatype of indices, index of indices
+		glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+
+		// Tells OpenGL which Shader Program we want to use
+		shaderProgram2.Activate();
+		// Exports the camera Position to the Fragment Shader for specular lighting
+		glUniform3f(glGetUniformLocation(shaderProgram2.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
+		// Export the camMatrix to the Vertex Shader of the pyramid
+		camera.Matrix(shaderProgram2, "camMatrix");
+		// Binds texture so that is appears in rendering
+		object2Tex.Bind();
+		// Bind the VAO so OpenGL knows to use it
+		VAO2.Bind();
 		// Draw primitives, number of indices, datatype of indices, index of indices
 		glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);
 
@@ -278,8 +356,13 @@ int main()
 	VAO1.Delete();
 	VBO1.Delete();
 	EBO1.Delete();
-	brickTex.Delete();
+	object1Tex.Delete();
 	shaderProgram.Delete();
+	VAO2.Delete();
+	VBO2.Delete();
+	EBO2.Delete();
+	object2Tex.Delete();
+	shaderProgram2.Delete();
 	lightVAO.Delete();
 	lightVBO.Delete();
 	lightEBO.Delete();
