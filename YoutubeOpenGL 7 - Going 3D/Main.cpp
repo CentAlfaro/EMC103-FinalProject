@@ -18,29 +18,42 @@ namespace fs = std::filesystem;
 #include"EBO.h"
 
 
-const unsigned int width = 800;
-const unsigned int height = 800;
+const unsigned int width = 1600;
+const unsigned int height = 900;
 
 
 // Vertices coordinates
 GLfloat vertices[] =
 { //     COORDINATES     /        COLORS      /   TexCoord  //
-	-0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f, // front lower left 0
-	-0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f, // back lower left 1
-	 0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f, // back lower right 2
-	 0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f, // front lower right 3
-	 0.0f, 0.8f,  0.0f,     0.92f, 0.86f, 0.76f,	2.5f, 5.0f // front top left 4
+	-0.3f, -0.0f,  0.3f,     0.0f, 0.0f, 0.0f,	0.0f, 0.0f, // front lower left 0
+	-0.3f, -0.0f, -0.3f,     0.0f, 0.0f, 0.0f,	4.0f, 0.0f, // back lower left 1
+	 0.3f, -0.0f, -0.3f,     0.0f, 0.0f, 0.0f,	0.0f, 0.0f, // back lower right 2
+	 0.3f, -0.0f,  0.3f,     0.0f, 0.0f, 0.0f,	4.0f, 0.0f, // front lower right 3
+
+	 -0.3f, 1.0f, 0.3f,		0.0f, 0.0f, 0.0f,	0.0f, 4.0f, // front top left 4
+	 -0.3f, 1.0f, -0.3f,	0.0f, 0.0f, 0.0f,	4.0f, 4.0f, // back top left 5
+	 0.3f, 1.0f, -0.3f,		0.0f, 0.0f, 0.0f,	0.0f, 4.0f, // back top right 6
+	 0.3f, 1.0f, 0.3f,		0.0f, 0.0f, 0.0f,	4.0f, 4.0f, // front top right 7
 };
 
 // Indices for vertices order
 GLuint indices[] =
 {
-	0, 1, 2,
-	0, 2, 3,
-	0, 1, 4,
-	1, 2, 4,
-	2, 3, 4,
-	3, 0, 4
+	0,1,2,
+	0,2,3,
+	0,3,7,
+	0,3,4,
+	0,4,7,
+	4,1,5,
+	4,0,1,
+	4,5,6,
+	7,6,4,
+	6,5,2,
+	6,5,1,
+	6,2,1,
+	7,6,3,
+	7,6,2,
+	7,3,2,
 };
 
 
@@ -114,7 +127,7 @@ int main()
 	std::string texPath = "/Resources/YoutubeOpenGL 7 - Going 3D/";
 
 	// Texture
-	Texture brickTex((parentDir + texPath + "brick.png").c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+	Texture brickTex((parentDir + texPath + "windows.png").c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 	brickTex.texUnit(shaderProgram, "tex0", 0);
 
 	// Original code from the tutorial
@@ -142,7 +155,7 @@ int main()
 		double crntTime = glfwGetTime();
 		if (crntTime - prevTime >= 1 / 60)
 		{
-			rotation += 0.5f;
+			rotation += 0.03f;
 			prevTime = crntTime;
 		}
 

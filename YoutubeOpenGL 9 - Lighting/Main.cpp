@@ -278,7 +278,7 @@ int main()
 	object1Tex.texUnit(shaderProgram, "tex0", 0);
 
 	Texture object2Tex((parentDir + texPath + "oldwindows.png").c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
-	object2Tex.texUnit(shaderProgram, "tex0", 0);
+	object2Tex.texUnit(shaderProgram2, "tex0", 0);
 
 	// Original code from the tutorial
 	/*Texture object1Tex("brick.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
@@ -305,7 +305,7 @@ int main()
 		// Updates and exports the camera matrix to the Vertex Shader
 		camera.updateMatrix(45.0f, 0.1f, 100.0f);
 
-
+		// OBJECT 1
 		// Tells OpenGL which Shader Program we want to use
 		shaderProgram.Activate();
 		// Exports the camera Position to the Fragment Shader for specular lighting
@@ -319,6 +319,7 @@ int main()
 		// Draw primitives, number of indices, datatype of indices, index of indices
 		glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);
 
+		// OBJECT 2
 		// Tells OpenGL which Shader Program we want to use
 		shaderProgram2.Activate();
 		// Exports the camera Position to the Fragment Shader for specular lighting
@@ -331,7 +332,6 @@ int main()
 		VAO2.Bind();
 		// Draw primitives, number of indices, datatype of indices, index of indices
 		glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);
-
 
 
 		// Tells OpenGL which Shader Program we want to use
